@@ -23,7 +23,7 @@ app.get("/api/hello", function (req, res) {
   res.json({ greeting: "hello API" });
 });
 
-app.get("/api/:date", (req, res) => {
+app.get("/api/:date?", (req, res) => {
   const dateParams = req.params.date;
 
   let date;
@@ -31,7 +31,7 @@ app.get("/api/:date", (req, res) => {
     date = new Date();
   } else {
     const unixTimeStamp = parseInt(dateParams);
-    if (!isNaN(unixTimeStamp)) {
+    if (!isNaN(unixTimeStamp) && unixTimeStamp.toString() === dateParams) {
       date = new Date(unixTimeStamp);
     } else {
       date = new Date(dateParams);
